@@ -24,7 +24,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 300;
   color: var(--text);
   background: var(--white);
@@ -34,11 +34,11 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--navy);
   line-height: 1.2;
   margin: 0 0 0.6em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 p { margin: 0 0 1em; color: var(--text); }
@@ -148,14 +148,15 @@ section { padding: 96px 0; }
 .brand-text .name { display: block; font-weight: 700; color: var(--navy); font-size: 1.02rem; }
 .brand-text .role { display: block; font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.03em; }
 
-.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; }
 .main-nav a {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text);
   position: relative;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 999px;
+  white-space: nowrap;
   transition: background 0.25s ease, color 0.25s ease;
 }
 .main-nav a:hover { color: var(--blue); }
@@ -193,7 +194,7 @@ section { padding: 96px 0; }
 .hero-bg {
   position: absolute;
   inset: -20px;
-  background: url("images/laborator.jpg") center 35% / cover no-repeat;
+  background: url("images/01.jpg") center 35% / cover no-repeat;
   filter: blur(6px) brightness(0.85) saturate(1.05);
   transform: scale(1.06);
   z-index: 0;
@@ -292,6 +293,13 @@ section { padding: 96px 0; }
 }
 .split-media img { width: 100%; height: 100%; object-fit: cover; }
 .split-media .media-placeholder {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--blue);
+}
+.img-missing .media-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -387,7 +395,7 @@ section { padding: 96px 0; }
 .cat-index {
   position: absolute;
   top: 28px; right: 32px;
-  font-family: "Fraunces", serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.85rem;
   color: var(--border);
   letter-spacing: 0.05em;
@@ -429,9 +437,9 @@ section { padding: 96px 0; }
 /* ---------- moje práce (před/po) ---------- */
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
-  max-width: 980px;
+  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -441,6 +449,12 @@ section { padding: 96px 0; }
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: var(--shadow);
+}
+
+.work-card:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 360px);
 }
 
 .before-after {
@@ -559,18 +573,36 @@ section { padding: 96px 0; }
 .site-footer {
   background: var(--navy-dark);
   color: rgba(255,255,255,0.6);
-  padding: 32px 0;
+  padding: 40px 0 0;
 }
-.footer-inner {
+.footer-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
-  font-size: 0.85rem;
+  gap: 10px 18px;
+  font-size: 0.88rem;
+  text-align: center;
+  padding-bottom: 28px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
-.footer-inner .brand-text .name { color: var(--white); }
-.footer-inner a:hover { color: var(--white); }
+.footer-info a { color: rgba(255,255,255,0.75); }
+.footer-info a:hover { color: var(--white); }
+.footer-title { color: var(--white); font-weight: 600; }
+.footer-name { color: var(--white); }
+.footer-info span:not(:last-child)::after,
+.footer-info a:not(:last-child)::after {
+  content: "·";
+  margin-left: 18px;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 18px 0;
+  font-size: 0.8rem;
+  text-align: center;
+}
 
 /* ---------- reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(.16,.8,.3,1), transform 0.75s cubic-bezier(.16,.8,.3,1); }
@@ -607,7 +639,6 @@ section { padding: 96px 0; }
   .split, .tycko-inner, .portfolio-grid, .contact-grid { grid-template-columns: 1fr; }
   .split.reverse .split-media, .split.reverse .split-text { order: initial; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .work-grid { grid-template-columns: repeat(2, 1fr); max-width: 620px; }
   .tycko { margin: 0 16px; padding: 48px 28px; }
   section { padding: 68px 0; }
 }
@@ -615,7 +646,6 @@ section { padding: 96px 0; }
 @media (max-width: 560px) {
   .feature-grid { grid-template-columns: 1fr; }
   .header-inner { padding: 14px 20px; }
-  .work-grid { grid-template-columns: 1fr; max-width: 340px; }
   .portfolio-card.fixed ul { grid-template-columns: 1fr; }
   .cat-index { top: 24px; right: 24px; }
 }
@@ -638,7 +668,7 @@ section { padding: 96px 0; }
 .mobile-nav a {
   color: var(--white);
   font-size: 1.4rem;
-  font-family: "Fraunces", serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding: 16px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
@@ -661,7 +691,8 @@ section { padding: 96px 0; }
   html { font-size: 18px; }
   :root { --maxw: 1360px; }
   .hero { padding: 150px 0 160px; }
-  .gallery-grid, .work-grid { max-width: 1080px; }
+  .gallery-grid { max-width: 1080px; }
+  .work-grid { max-width: 400px; }
 }
 
 @media (min-width: 2200px) {

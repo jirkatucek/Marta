@@ -1,3 +1,28 @@
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+const forceScrollTop = () => {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+};
+
+forceScrollTop();
+requestAnimationFrame(forceScrollTop);
+
+window.addEventListener("load", () => {
+  forceScrollTop();
+  requestAnimationFrame(forceScrollTop);
+  setTimeout(forceScrollTop, 0);
+});
+
+window.addEventListener("pageshow", () => {
+  forceScrollTop();
+  requestAnimationFrame(forceScrollTop);
+  setTimeout(forceScrollTop, 0);
+});
+
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // mobile nav
